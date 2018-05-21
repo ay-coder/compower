@@ -95,7 +95,7 @@ class APICartController extends BaseApiController
      */
     public function add(Request $request)
     {
-        if($request->get('product_id'))
+        if($request->get('product_id') && $request->get('qty') && $request->get('qty') > 0 )
         {
             $productId  = $request->get('product_id');   
             $input      = $request->all();

@@ -107,13 +107,13 @@ class APIProductsController extends BaseApiController
             {
                 $itemsOutput = $this->productsTransformer->transformCollection($items);
 
-                return $this->successResponse($itemsOutput);
+            return $this->successResponse($itemsOutput);
             }
         }
 
         return $this->setStatusCode(400)->failureResponse([
-            'message' => 'Unable to find Category!'
-            ], 'No Category Found !');
+            'message' => 'Unable to find Product!'
+            ], 'No Products Found !');
     }
 
     /**
