@@ -346,7 +346,7 @@ class UsersController extends BaseApiController
                 'message' => 'Password Updated successfully.'
             ];
             
-            return $this->successResponse($successResponse);
+            return $this->successResponse($successResponse, 'Password Updated successfully.');
         }
 
         return $this->setStatusCode(400)->failureResponse([
