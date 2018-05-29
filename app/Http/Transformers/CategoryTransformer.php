@@ -28,12 +28,13 @@ class CategoryTransformer extends Transformer
         if(isset($item->products) && count($item->products))
         {
             $productData = [];
-
+            $sr = 0;
             foreach($item->products as $product)
             {
                 $product = (object) $product;
+                $productImage = $productChart = $productPdf = [];
 
-                $productData[] =[
+                $productData[$sr] =[
                     'product_id'    => (int) $product->id,
                     'title'         => $this->nulltoBlank($product->title),
                     'model'         => $this->nulltoBlank($product->model),
@@ -42,21 +43,79 @@ class CategoryTransformer extends Transformer
                     'description'   => $this->nulltoBlank($product->description),
                     'features'      => $this->nulltoBlank($product->features),
                     'specifications'=> $this->nulltoBlank($product->specifications),
-                    'image_1'       => isset($product->image_1) ? URL::to('/').'/uploads/products/' . $product->image_1 : '',
-                    'image_2'       => isset($product->image_2) ? URL::to('/').'/uploads/products/' . $product->image_2 : '',
-                    'image_3'       => isset($product->image_3) ? URL::to('/').'/uploads/products/' . $product->image_3 : '',
-                    'image_4'       => isset($product->image_4) ? URL::to('/').'/uploads/products/' . $product->image_4 : '',
-                    'image_5'       => isset($product->image_5) ? URL::to('/').'/uploads/products/' . $product->image_5 : '',
-                    'chart_1'       => isset($product->chart_1) ? URL::to('/').'/uploads/charts/' . $product->chart_1 : '',
-                    'chart_2'       => isset($product->chart_2) ? URL::to('/').'/uploads/charts/' . $product->chart_2 : '',
-                    'chart_3'       => isset($product->chart_3) ? URL::to('/').'/uploads/charts/' . $product->chart_3 : '',
-                    'pdf_title_1'   => $this->nulltoBlank($product->pdf_title_1),
-                    'pdf_1'         => isset($product->pdf_1) ? URL::to('/').'/uploads/pdf/' . $product->pdf_1 : '',
-                    'pdf_title_2'   => $this->nulltoBlank($product->pdf_title_2),
-                    'pdf_2'         => isset($product->pdf_2) ? URL::to('/').'/uploads/pdf/' . $product->pdf_2 : '',
-                    'pdf_title_3'   => $this->nulltoBlank($product->pdf_title_3),
-                    'pdf_3'         => isset($product->pdf_3) ? URL::to('/').'/uploads/pdf/' . $product->pdf_3 : '',
+                    'images'        => [],
+                    'charts'        => [],
+                    'pdfs'          => []
                 ];
+                
+                if(isset($product->image_1) && strlen($product->image_1) > 1)
+                {
+                    $productImages[] = URL::to('/').'/uploads/products/'.$product->image_1;
+                }
+
+                if(isset($product->image_2) && strlen($product->image_2) > 1)
+                {
+                    $productImages[] = URL::to('/').'/uploads/products/'.$product->image_2;
+                }
+
+                if(isset($product->image_3) && strlen($product->image_3) > 1)
+                {
+                    $productImages[] = URL::to('/').'/uploads/products/'.$product->image_3;
+                }
+
+                if(isset($product->image_4) && strlen($product->image_4) > 1)
+                {
+                    $productImages[] = URL::to('/').'/uploads/products/'.$product->image_4;
+                }
+
+                if(isset($product->image_5) && strlen($product->image_5) > 1)
+                {
+                    $productImages[] = URL::to('/').'/uploads/products/'.$product->image_5;
+                }
+
+                if(isset($product->chart_1) && strlen($product->chart_1) > 1)
+                {
+                    $productChart[] = URL::to('/').'/uploads/charts/'.$product->chart_1;
+                }
+
+                if(isset($product->chart_2) && strlen($product->chart_2) > 1)
+                {
+                    $productChart[] = URL::to('/').'/uploads/charts/'.$product->chart_2;
+                }
+
+                if(isset($product->chart_3) && strlen($product->chart_3) > 1)
+                {
+                    $productChart[] = URL::to('/').'/uploads/charts/'.$product->chart_3;
+                }
+
+                if(isset($product->pdf_1) && strlen($product->pdf_1) > 1)
+                {
+                    $productPdf[] = [
+                        'title' => $this->nulltoBlank($product->pdf_title_1),
+                        'pdf'   => URL::to('/').'/uploads/pdf/'.$product->pdf_1
+                    ];
+                }
+
+                if(isset($product->pdf_2) && strlen($product->pdf_2) > 1)
+                {
+                    $productPdf[] = [
+                        'title' => $this->nulltoBlank($product->pdf_title_2),
+                        'pdf'   => URL::to('/').'/uploads/pdf/'.$product->pdf_2
+                    ];
+                }
+
+                if(isset($product->pdf_3) && strlen($product->pdf_3) > 1)
+                {
+                    $productPdf[] = [
+                        'title' => $this->nulltoBlank($product->pdf_title_3),
+                        'pdf'   => URL::to('/').'/uploads/pdf/'.$product->pdf_3
+                    ];
+                }
+
+                $productData[$sr]['charts'] = $productChart;
+                $productData[$sr]['pdfs']   = $productPdf;
+                $productData[$sr]['images'] = $productImages;
+                $sr++;
             }
             
             $response['products'] = $productData;

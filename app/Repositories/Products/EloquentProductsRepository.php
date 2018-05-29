@@ -239,7 +239,7 @@ class EloquentProductsRepository extends DbRepository
      */
     public function getAll($orderBy = 'id', $sort = 'asc')
     {
-        return $this->model->orderBy($orderBy, $sort)->get();
+        return $this->model->with('category')->orderBy($orderBy, $sort)->get();
     }
 
     /**

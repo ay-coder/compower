@@ -1,5 +1,71 @@
 [
   {
+    "type": "get",
+    "url": "blogs",
+    "title": "Blogs ( Need Headers)",
+    "name": "blogs",
+    "group": "Blog",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"data\": [\n        {\n            \"blog_id\": 1,\n            \"title\": \"Test\",\n            \"subtitle\": \"Sub\",\n            \"description\": \"This si testing details.\",\n            \"btn_text\": \"Read More\",\n            \"additional_link\": \"#\",\n            \"image\": \"http://compower.local/uploads/blog/default.png\"\n        },\n        {\n            \"blog_id\": 2,\n            \"title\": \"Another \",\n            \"subtitle\": \"PRoject\",\n            \"description\": \"This is second blog testing. \",\n            \"btn_text\": \"Read More\",\n            \"additional_link\": \"#\",\n            \"image\": \"http://compower.local/uploads/blog/default.png\"\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (No Blogs Found ):",
+          "content": "{\n    \"error\": {\n        \"message\": \"Unable to find Blogs!\"\n    },\n    \"status\": false,\n    \"message\": \"No Blogs Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Blog",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/blogs"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "cart",
+    "title": "User Cart ( Need Headers)",
+    "name": "cart",
+    "group": "Cart",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"data\": {\n        \"total_items\": 1,\n        \"cart_total\": 1252.5,\n        \"items\": [\n            {\n                \"cart_id\": 11,\n                \"user_id\": 3,\n                \"product_id\": 3,\n                \"qty\": 5,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"price\": 250.5,\n                \"total\": 1252.5,\n                \"images\": [\n                    \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"http://compower.local/uploads/products/37868_product.jpg\"\n                ],\n                \"charts\": [\n                    \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                ],\n                \"pdfs\": [\n                    {\n                        \"title\": \"Title - 1\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response ( User Not Found ):",
+          "content": "{\n    \"error\": {\n        \"reason\": \"User Not Found !\"\n    },\n    \"status\": false,\n    \"message\": \"User Not Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Cart",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/cart"
+      }
+    ]
+  },
+  {
     "type": "post",
     "url": "cart/add",
     "title": "Add Product To Cart( Need Headers)",
@@ -29,7 +95,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"total_items\": 2,\n        \"cart_total\": 49176.5,\n        \"items\": [\n            {\n                \"cart_id\": 11,\n                \"user_id\": 3,\n                \"product_id\": 3,\n                \"qty\": 5,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"price\": 250.5,\n                \"total\": 1252.5,\n                \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n                \"image_3\": \"\",\n                \"image_4\": \"\",\n                \"image_5\": \"\"\n            },\n            {\n                \"cart_id\": 21,\n                \"user_id\": 3,\n                \"product_id\": 2,\n                \"qty\": 1,\n                \"title\": \"Product 2\",\n                \"model\": \"Modla - 2\",\n                \"price\": 47924,\n                \"total\": 47924,\n                \"image_1\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                \"image_2\": \"\",\n                \"image_3\": \"\",\n                \"image_4\": \"\",\n                \"image_5\": \"\"\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": {\n        \"total_items\": 2,\n        \"cart_total\": 49176.5,\n        \"items\": [\n            {\n                \"cart_id\": 11,\n                \"user_id\": 3,\n                \"product_id\": 3,\n                \"qty\": 5,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"price\": 250.5,\n                \"total\": 1252.5,\n                \"images\": [\n                    \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"http://compower.local/uploads/products/37868_product.jpg\"\n                ],\n                \"charts\": [\n                    \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                ],\n                \"pdfs\": [\n                    {\n                        \"title\": \"Title - 1\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                    }\n                ]\n            },\n            {\n                \"cart_id\": 13,\n                \"user_id\": 3,\n                \"product_id\": 2,\n                \"qty\": 1,\n                \"title\": \"Product 2\",\n                \"model\": \"Modla - 2\",\n                \"price\": 47924,\n                \"total\": 47924,\n                \"images\": [\n                    \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"http://compower.local/uploads/products/37868_product.jpg\",\n                    \"http://compower.local/uploads/products/51936_product.jpg\"\n                ],\n                \"charts\": [\n                    \"http://compower.local/uploads/charts/85053_chart.jpg\",\n                    \"http://compower.local/uploads/charts/59865_chart.jpg\"\n                ],\n                \"pdfs\": [\n                    {\n                        \"title\": \"Title - 1\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                    },\n                    {\n                        \"title\": \"View Best Performance\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/92445_pdf.jpg\"\n                    },\n                    {\n                        \"title\": \"View Best Performance - 2\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/11403_pdf.jpg\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"Product added to Cart Successfully.\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -75,7 +141,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"total_items\": 1,\n        \"cart_total\": 1252.5,\n        \"items\": [\n            {\n                \"cart_id\": 11,\n                \"user_id\": 3,\n                \"product_id\": 3,\n                \"qty\": 5,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"price\": 250.5,\n                \"total\": 1252.5,\n                \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n                \"image_3\": \"\",\n                \"image_4\": \"\",\n                \"image_5\": \"\"\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": {\n        \"total_items\": 1,\n        \"cart_total\": 1252.5,\n        \"items\": [\n            {\n                \"cart_id\": 11,\n                \"user_id\": 3,\n                \"product_id\": 3,\n                \"qty\": 5,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"price\": 250.5,\n                \"total\": 1252.5,\n                \"images\": [\n                    \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"http://compower.local/uploads/products/37868_product.jpg\"\n                ],\n                \"charts\": [\n                    \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                ],\n                \"pdfs\": [\n                    {\n                        \"title\": \"Title - 1\",\n                        \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                    }\n                ]\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -108,7 +174,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": [\n        {\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"products\": [\n                {\n                    \"product_id\": 1,\n                    \"title\": \"Test Proudct\",\n                    \"model\": \"Modal - 001\",\n                    \"qty\": 250,\n                    \"price\": 1000,\n                    \"description\": \"This is Lorem Ipusm test things.\",\n                    \"features\": \"Special Features\",\n                    \"specifications\": \"Specal Specification\",\n                    \"image_1\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"image_2\": \"http://compower.local/uploads/products/85576_product.jpg\",\n                    \"image_3\": \"http://compower.local/uploads/products/68294_product.jpg\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                    \"chart_2\": \"http://compower.local/uploads/charts/70282_chart.jpg\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"PDF 1\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\",\n                    \"pdf_title_2\": \"PDF TItle 2\",\n                    \"pdf_2\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                },\n                {\n                    \"product_id\": 2,\n                    \"title\": \"Product 2\",\n                    \"model\": \"Modla - 2\",\n                    \"qty\": 1000,\n                    \"price\": 47924,\n                    \"description\": \"Thi sis Prduc\",\n                    \"features\": \"This is features\",\n                    \"specifications\": \"Specifications\",\n                    \"image_1\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                    \"image_2\": \"\",\n                    \"image_3\": \"\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/59865_chart.jpg\",\n                    \"chart_2\": \"\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"View Best Performance\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/92445_pdf.jpg\",\n                    \"pdf_title_2\": \"View Best Performance - 2\",\n                    \"pdf_2\": \"http://compower.local/uploads/pdf/11403_pdf.jpg\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                }\n            ]\n        },\n        {\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"products\": [\n                {\n                    \"product_id\": 3,\n                    \"title\": \"Absorbing Clamp - 12\",\n                    \"model\": \"AB - 2018\",\n                    \"qty\": 2500,\n                    \"price\": 250.5,\n                    \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                    \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                    \"specifications\": \"Optional Specification\",\n                    \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n                    \"image_3\": \"\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/85053_chart.jpg\",\n                    \"chart_2\": \"\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"Title - 1\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\",\n                    \"pdf_title_2\": \"\",\n                    \"pdf_2\": \"\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": [\n        {\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"products\": [\n                {\n                    \"product_id\": 1,\n                    \"title\": \"Test Proudct\",\n                    \"model\": \"Modal - 001\",\n                    \"qty\": 250,\n                    \"price\": 1000,\n                    \"description\": \"This is Lorem Ipusm test things.\",\n                    \"features\": \"Special Features\",\n                    \"specifications\": \"Specal Specification\",\n                    \"images\": [\n                        \"http://compower.local/uploads/products/31797_product.jpg\",\n                        \"http://compower.local/uploads/products/85576_product.jpg\",\n                        \"http://compower.local/uploads/products/68294_product.jpg\"\n                    ],\n                    \"charts\": [\n                        \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                        \"http://compower.local/uploads/charts/70282_chart.jpg\"\n                    ],\n                    \"pdfs\": [\n                        {\n                            \"title\": \"PDF 1\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\"\n                        },\n                        {\n                            \"title\": \"PDF TItle 2\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"products\": [\n                {\n                    \"product_id\": 3,\n                    \"title\": \"Absorbing Clamp - 12\",\n                    \"model\": \"AB - 2018\",\n                    \"qty\": 2500,\n                    \"price\": 250.5,\n                    \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                    \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                    \"specifications\": \"Optional Specification\",\n                    \"images\": [\n                        \"http://compower.local/uploads/products/45949_product.jpg\",\n                        \"http://compower.local/uploads/products/37868_product.jpg\"\n                    ],\n                    \"charts\": [\n                        \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                    ],\n                    \"pdfs\": [\n                        {\n                            \"title\": \"Title - 1\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -154,7 +220,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n    \"data\": [\n        {\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"products\": [\n                {\n                    \"product_id\": 1,\n                    \"title\": \"Test Proudct\",\n                    \"model\": \"Modal - 001\",\n                    \"qty\": 250,\n                    \"price\": 1000,\n                    \"description\": \"This is Lorem Ipusm test things.\",\n                    \"features\": \"Special Features\",\n                    \"specifications\": \"Specal Specification\",\n                    \"image_1\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"image_2\": \"http://compower.local/uploads/products/85576_product.jpg\",\n                    \"image_3\": \"http://compower.local/uploads/products/68294_product.jpg\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                    \"chart_2\": \"http://compower.local/uploads/charts/70282_chart.jpg\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"PDF 1\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\",\n                    \"pdf_title_2\": \"PDF TItle 2\",\n                    \"pdf_2\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                },\n                {\n                    \"product_id\": 2,\n                    \"title\": \"Product 2\",\n                    \"model\": \"Modla - 2\",\n                    \"qty\": 1000,\n                    \"price\": 47924,\n                    \"description\": \"Thi sis Prduc\",\n                    \"features\": \"This is features\",\n                    \"specifications\": \"Specifications\",\n                    \"image_1\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                    \"image_2\": \"\",\n                    \"image_3\": \"\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/59865_chart.jpg\",\n                    \"chart_2\": \"\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"View Best Performance\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/92445_pdf.jpg\",\n                    \"pdf_title_2\": \"View Best Performance - 2\",\n                    \"pdf_2\": \"http://compower.local/uploads/pdf/11403_pdf.jpg\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                }\n            ]\n        },\n        {\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"products\": [\n                {\n                    \"product_id\": 3,\n                    \"title\": \"Absorbing Clamp - 12\",\n                    \"model\": \"AB - 2018\",\n                    \"qty\": 2500,\n                    \"price\": 250.5,\n                    \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                    \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                    \"specifications\": \"Optional Specification\",\n                    \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n                    \"image_3\": \"\",\n                    \"image_4\": \"\",\n                    \"image_5\": \"\",\n                    \"chart_1\": \"http://compower.local/uploads/charts/85053_chart.jpg\",\n                    \"chart_2\": \"\",\n                    \"chart_3\": \"\",\n                    \"pdf_title_1\": \"Title - 1\",\n                    \"pdf_1\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\",\n                    \"pdf_title_2\": \"\",\n                    \"pdf_2\": \"\",\n                    \"pdf_title_3\": \"\",\n                    \"pdf_3\": \"\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n     \"data\": [\n         {\n             \"category_id\": 1,\n             \"category_title\": \"Antenna - Updated\",\n             \"products\": [\n                 {\n                     \"product_id\": 1,\n                     \"title\": \"Test Proudct\",\n                     \"model\": \"Modal - 001\",\n                     \"qty\": 250,\n                     \"price\": 1000,\n                     \"description\": \"This is Lorem Ipusm test things.\",\n                     \"features\": \"Special Features\",\n                     \"specifications\": \"Specal Specification\",\n                     \"images\": [\n                         \"http://compower.local/uploads/products/31797_product.jpg\",\n                         \"http://compower.local/uploads/products/85576_product.jpg\",\n                         \"http://compower.local/uploads/products/68294_product.jpg\"\n                     ],\n                     \"charts\": [\n                         \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                         \"http://compower.local/uploads/charts/70282_chart.jpg\"\n                     ],\n                     \"pdfs\": [\n                         {\n                             \"title\": \"PDF 1\",\n                             \"pdf\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\"\n                         },\n                         {\n                             \"title\": \"PDF TItle 2\",\n                             \"pdf\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\"\n                         }\n                     ]\n                 }\n             ]\n         },\n         {\n             \"category_id\": 2,\n             \"category_title\": \"Absorbing Clamps\",\n             \"products\": [\n                 {\n                     \"product_id\": 3,\n                     \"title\": \"Absorbing Clamp - 12\",\n                     \"model\": \"AB - 2018\",\n                     \"qty\": 2500,\n                     \"price\": 250.5,\n                     \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                     \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                     \"specifications\": \"Optional Specification\",\n                     \"images\": [\n                         \"http://compower.local/uploads/products/45949_product.jpg\",\n                         \"http://compower.local/uploads/products/37868_product.jpg\"\n                     ],\n                     \"charts\": [\n                         \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                     ],\n                     \"pdfs\": [\n                         {\n                             \"title\": \"Title - 1\",\n                             \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                         }\n                     ]\n                 }\n             ]\n         }\n     ],\n     \"status\": true,\n     \"message\": \"Success\",\n     \"code\": 200\n }",
           "type": "json"
         }
       ]
@@ -200,7 +266,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"category_id\": 2,\n        \"category_title\": \"Absorbing Clamps\",\n        \"products\": [\n            {\n                \"product_id\": 3,\n                \"title\": \"Absorbing Clamp - 12\",\n                \"model\": \"AB - 2018\",\n                \"qty\": 2500,\n                \"price\": 250.5,\n                \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                \"specifications\": \"Optional Specification\",\n                \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n                \"image_3\": \"\",\n                \"image_4\": \"\",\n                \"image_5\": \"\",\n                \"chart_1\": \"http://compower.local/uploads/charts/85053_chart.jpg\",\n                \"chart_2\": \"\",\n                \"chart_3\": \"\",\n                \"pdf_title_1\": \"Title - 1\",\n                \"pdf_1\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\",\n                \"pdf_title_2\": \"\",\n                \"pdf_2\": \"\",\n                \"pdf_title_3\": \"\",\n                \"pdf_3\": \"\"\n            }\n        ]\n    },\n    \"status\": true,\n    \"message\": \"View Item\",\n    \"code\": 200\n}",
+          "content": "    {\n    \"data\": [\n        {\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"products\": [\n                {\n                    \"product_id\": 1,\n                    \"title\": \"Test Proudct\",\n                    \"model\": \"Modal - 001\",\n                    \"qty\": 250,\n                    \"price\": 1000,\n                    \"description\": \"This is Lorem Ipusm test things.\",\n                    \"features\": \"Special Features\",\n                    \"specifications\": \"Specal Specification\",\n                    \"images\": [\n                        \"http://compower.local/uploads/products/31797_product.jpg\",\n                        \"http://compower.local/uploads/products/85576_product.jpg\",\n                        \"http://compower.local/uploads/products/68294_product.jpg\"\n                    ],\n                    \"charts\": [\n                        \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                        \"http://compower.local/uploads/charts/70282_chart.jpg\"\n                    ],\n                    \"pdfs\": [\n                        {\n                            \"title\": \"PDF 1\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\"\n                        },\n                        {\n                            \"title\": \"PDF TItle 2\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\"\n                        }\n                    ]\n                }\n            ]\n        },\n        {\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"products\": [\n                {\n                    \"product_id\": 3,\n                    \"title\": \"Absorbing Clamp - 12\",\n                    \"model\": \"AB - 2018\",\n                    \"qty\": 2500,\n                    \"price\": 250.5,\n                    \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n                    \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n                    \"specifications\": \"Optional Specification\",\n                    \"images\": [\n                        \"http://compower.local/uploads/products/45949_product.jpg\",\n                        \"http://compower.local/uploads/products/37868_product.jpg\"\n                    ],\n                    \"charts\": [\n                        \"http://compower.local/uploads/charts/85053_chart.jpg\"\n                    ],\n                    \"pdfs\": [\n                        {\n                            \"title\": \"Title - 1\",\n                            \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -246,7 +312,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": [\n        {\n            \"product_id\": 3,\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"title\": \"Absorbing Clamp - 12\",\n            \"model\": \"AB - 2018\",\n            \"qty\": 2500,\n            \"price\": 250.5,\n            \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n            \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n            \"specifications\": \"Optional Specification\",\n            \"image_1\": \"http://compower.local/uploads/products/45949_product.jpg\",\n            \"image_2\": \"http://compower.local/uploads/products/37868_product.jpg\",\n            \"image_3\": \"\",\n            \"image_4\": \"\",\n            \"image_5\": \"\",\n            \"chart_1\": \"http://compower.local/uploads/charts/85053_chart.jpg\",\n            \"chart_2\": \"\",\n            \"chart_3\": \"\",\n            \"pdf_title_1\": \"Title - 1\",\n            \"pdf_1\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\",\n            \"pdf_title_2\": \"\",\n            \"pdf_2\": \"\",\n            \"pdf_title_3\": \"\",\n            \"pdf_3\": \"\"\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": [\n        {\n            \"product_id\": 3,\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"title\": \"Absorbing Clamp - 12\",\n            \"model\": \"AB - 2018\",\n            \"qty\": 2500,\n            \"price\": 250.5,\n            \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n            \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n            \"specifications\": \"Optional Specification\",\n            \"images\": [\n                \"http://compower.local/uploads/products/45949_product.jpg\",\n                \"http://compower.local/uploads/products/37868_product.jpg\"\n            ],\n            \"charts\": [\n                \"http://compower.local/uploads/charts/85053_chart.jpg\"\n            ],\n            \"pdfs\": [\n                {\n                    \"title\": \"Title - 1\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -388,7 +454,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"user_id\": 3,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODc4MjA4LCJleHAiOjE1NTg0MTQyMDgsIm5iZiI6MTUyNjg3ODIwOCwianRpIjoiU2xXNmpmNnhhaDBrQWtLcyJ9.x0NsZNHZe517mNKKxrfIY9M4IUDp-LVeW-4bWNP1cEU\",\n        \"device_token\": \"12kjerl3kjKDL343\",\n        \"name\": \"KB\",\n        \"email\": \"user@user.com\",\n        \"company_name\": \"Adroit\",\n        \"contact_name\": \"KB Jaha\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\php9BF6.tmp\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road - Updated\",\n        \"city\": \"Abad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"India\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": {\n        \"user_id\": 3,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODc4MjA4LCJleHAiOjE1NTg0MTQyMDgsIm5iZiI6MTUyNjg3ODIwOCwianRpIjoiU2xXNmpmNnhhaDBrQWtLcyJ9.x0NsZNHZe517mNKKxrfIY9M4IUDp-LVeW-4bWNP1cEU\",\n        \"device_token\": \"12kjerl3kjKDL343\",\n        \"name\": \"KB\",\n        \"email\": \"user@user.com\",\n        \"company_name\": \"Adroit\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\php9BF6.tmp\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road - Updated\",\n        \"city\": \"Abad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"India\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -441,6 +507,39 @@
     "sampleRequest": [
       {
         "url": "http://35.154.84.230/compower/public/api/logout"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "products",
+    "title": "Products  List ( Need Headers)",
+    "name": "products",
+    "group": "Product",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"data\": [\n        {\n            \"product_id\": 1,\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"title\": \"Test Proudct\",\n            \"model\": \"Modal - 001\",\n            \"qty\": 250,\n            \"price\": 1000,\n            \"description\": \"This is Lorem Ipusm test things.\",\n            \"features\": \"Special Features\",\n            \"specifications\": \"Specal Specification\",\n            \"images\": [\n                \"http://compower.local/uploads/products/31797_product.jpg\",\n                \"http://compower.local/uploads/products/85576_product.jpg\",\n                \"http://compower.local/uploads/products/68294_product.jpg\"\n            ],\n            \"charts\": [\n                \"http://compower.local/uploads/charts/85709_chart.jpg\",\n                \"http://compower.local/uploads/charts/70282_chart.jpg\"\n            ],\n            \"pdfs\": [\n                {\n                    \"title\": \"PDF 1\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/13709_pdf.jpg\"\n                },\n                {\n                    \"title\": \"PDF TItle 2\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/41750_pdf.jpg\"\n                }\n            ]\n        },\n        {\n            \"product_id\": 2,\n            \"category_id\": 1,\n            \"category_title\": \"Antenna - Updated\",\n            \"title\": \"Product 2\",\n            \"model\": \"Modla - 2\",\n            \"qty\": 1000,\n            \"price\": 47924,\n            \"description\": \"Thi sis Prduc\",\n            \"features\": \"This is features\",\n            \"specifications\": \"Specifications\",\n            \"images\": [\n                \"http://compower.local/uploads/products/51936_product.jpg\"\n            ],\n            \"charts\": [\n                \"http://compower.local/uploads/charts/59865_chart.jpg\"\n            ],\n            \"pdfs\": [\n                {\n                    \"title\": \"View Best Performance\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/92445_pdf.jpg\"\n                },\n                {\n                    \"title\": \"View Best Performance - 2\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/11403_pdf.jpg\"\n                }\n            ]\n        },\n        {\n            \"product_id\": 3,\n            \"category_id\": 2,\n            \"category_title\": \"Absorbing Clamps\",\n            \"title\": \"Absorbing Clamp - 12\",\n            \"model\": \"AB - 2018\",\n            \"qty\": 2500,\n            \"price\": 250.5,\n            \"description\": \"this is description\\r\\n\\r\\nMultiline Test\\r\\n\\r\\nTHird Line\",\n            \"features\": \"Frequency - 100 MHZ\\r\\n\\r\\nHuman Readable\\r\\n\\r\\nBits / Byte - Calculated\",\n            \"specifications\": \"Optional Specification\",\n            \"images\": [\n                \"http://compower.local/uploads/products/45949_product.jpg\",\n                \"http://compower.local/uploads/products/37868_product.jpg\"\n            ],\n            \"charts\": [\n                \"http://compower.local/uploads/charts/85053_chart.jpg\"\n            ],\n            \"pdfs\": [\n                {\n                    \"title\": \"Title - 1\",\n                    \"pdf\": \"http://compower.local/uploads/pdf/37947_pdf.jpg\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (No Product Found ):",
+          "content": "{\n    \"error\": {\n        \"message\": \"Unable to find Products!\"\n    },\n    \"status\": false,\n    \"message\": \"No Products Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Product",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/products"
       }
     ]
   },
@@ -545,13 +644,6 @@
             "group": "Register",
             "type": "string",
             "optional": false,
-            "field": "contact_name",
-            "description": "<p>Contact Name - Optional</p>"
-          },
-          {
-            "group": "Register",
-            "type": "string",
-            "optional": false,
             "field": "address",
             "description": "<p>User Address - Optional</p>"
           },
@@ -597,7 +689,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"user_id\": 3,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODA1NjY2LCJleHAiOjE1NTgzNDE2NjYsIm5iZiI6MTUyNjgwNTY2NiwianRpIjoiR05idE84ZEpiamFpYThQMCJ9.nNCqSzyyEH0imkSbyNLq9vTB7lFLpN2ZarUAFp_0VKE\",\n        \"device_token\": \"21D8347DTB4509\",\n        \"name\": \"KB\",\n        \"email\": \"user@user.com\",\n        \"company_name\": \"Adroit\",\n        \"contact_name\": \"KB Jaha\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/70925_user.jpg\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road - Updated\",\n        \"city\": \"Abad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"India\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": {\n        \"user_id\": 3,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODA1NjY2LCJleHAiOjE1NTgzNDE2NjYsIm5iZiI6MTUyNjgwNTY2NiwianRpIjoiR05idE84ZEpiamFpYThQMCJ9.nNCqSzyyEH0imkSbyNLq9vTB7lFLpN2ZarUAFp_0VKE\",\n        \"device_token\": \"21D8347DTB4509\",\n        \"name\": \"KB\",\n        \"email\": \"user@user.com\",\n        \"company_name\": \"Adroit\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/70925_user.jpg\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road - Updated\",\n        \"city\": \"Abad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"India\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -643,7 +735,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n     \"data\": {\n         \"user_id\": 3,\n         \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODA1NjY2LCJleHAiOjE1NTgzNDE2NjYsIm5iZiI6MTUyNjgwNTY2NiwianRpIjoiR05idE84ZEpiamFpYThQMCJ9.nNCqSzyyEH0imkSbyNLq9vTB7lFLpN2ZarUAFp_0VKE\",\n         \"device_token\": \"21D8347DTB4509\",\n         \"name\": \"KB\",\n         \"email\": \"user@user.com\",\n         \"company_name\": \"Adroit\",\n         \"contact_name\": \"KB Jaha\",\n         \"mobile\": \"2255244\",\n         \"profile_pic\": \"http://compower.local/uploads/user/70925_user.jpg\",\n         \"device_type\": \"1\",\n         \"address\": \"C G Road - Updated\",\n         \"city\": \"Abad\",\n         \"state\": \"Gujarat\",\n         \"zip\": \"234893\",\n         \"country\": \"India\",\n         \"notification_count\": 0\n     },\n     \"status\": true,\n     \"message\": \"Success\",\n     \"code\": 200\n }",
+          "content": "{\n     \"data\": {\n         \"user_id\": 3,\n         \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL2NvbXBvd2VyLmxvY2FsXC9hcGlcL2xvZ2luIiwiaWF0IjoxNTI2ODA1NjY2LCJleHAiOjE1NTgzNDE2NjYsIm5iZiI6MTUyNjgwNTY2NiwianRpIjoiR05idE84ZEpiamFpYThQMCJ9.nNCqSzyyEH0imkSbyNLq9vTB7lFLpN2ZarUAFp_0VKE\",\n         \"device_token\": \"21D8347DTB4509\",\n         \"name\": \"KB\",\n         \"email\": \"user@user.com\",\n         \"company_name\": \"Adroit\",\n         \"mobile\": \"2255244\",\n         \"profile_pic\": \"http://compower.local/uploads/user/70925_user.jpg\",\n         \"device_type\": \"1\",\n         \"address\": \"C G Road - Updated\",\n         \"city\": \"Abad\",\n         \"state\": \"Gujarat\",\n         \"zip\": \"234893\",\n         \"country\": \"India\",\n         \"notification_count\": 0\n     },\n     \"status\": true,\n     \"message\": \"Success\",\n     \"code\": 200\n }",
           "type": "json"
         }
       ]
@@ -707,13 +799,6 @@
             "optional": false,
             "field": "company_name",
             "description": "<p>Company Name  - Required</p>"
-          },
-          {
-            "group": "Register",
-            "type": "string",
-            "optional": false,
-            "field": "contact_name",
-            "description": "<p>Contact Name  - Required</p>"
           },
           {
             "group": "Register",
@@ -785,7 +870,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n    \"data\": {\n        \"user_id\": 11,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExLCJpc3MiOiJodHRwOlwvXC9jb21wb3dlci5sb2NhbFwvYXBpXC9yZWdpc3RlciIsImlhdCI6MTUyNjg3ODQ1NywiZXhwIjoxNTU4NDE0NDU3LCJuYmYiOjE1MjY4Nzg0NTcsImp0aSI6InA0cndwU0c1NERsQ0lQejEifQ.i6GLq8R9Ql-zFG0My6RlqTuI_EF9UM-hq56EN5vRcZ8\",\n        \"device_token\": \"21D8347DTB4509\",\n        \"name\": \"KB\",\n        \"email\": \"userk12134@user.com\",\n        \"company_name\": \"Adroit\",\n        \"contact_name\": \"KB Jaha\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/default.png\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road\",\n        \"city\": \"ahmedabad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "{\n    \"data\": {\n        \"user_id\": 11,\n        \"user_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjExLCJpc3MiOiJodHRwOlwvXC9jb21wb3dlci5sb2NhbFwvYXBpXC9yZWdpc3RlciIsImlhdCI6MTUyNjg3ODQ1NywiZXhwIjoxNTU4NDE0NDU3LCJuYmYiOjE1MjY4Nzg0NTcsImp0aSI6InA0cndwU0c1NERsQ0lQejEifQ.i6GLq8R9Ql-zFG0My6RlqTuI_EF9UM-hq56EN5vRcZ8\",\n        \"device_token\": \"21D8347DTB4509\",\n        \"name\": \"KB\",\n        \"email\": \"userk12134@user.com\",\n        \"company_name\": \"Adroit\",\n        \"mobile\": \"2255244\",\n        \"profile_pic\": \"http://compower.local/uploads/user/default.png\",\n        \"device_type\": \"1\",\n        \"address\": \"C G Road\",\n        \"city\": \"ahmedabad\",\n        \"state\": \"Gujarat\",\n        \"zip\": \"234893\",\n        \"country\": \"\",\n        \"notification_count\": 0\n    },\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -810,6 +895,39 @@
     "sampleRequest": [
       {
         "url": "http://35.154.84.230/compower/public/api/register"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "techcategories",
+    "title": "Tech Notes ( Need Headers)",
+    "name": "techcategories",
+    "group": "Tech_Notes",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"data\": [\n        {\n            \"category_id\": 1,\n            \"title\": \"Tech 1\",\n            \"notes\": [\n                {\n                    \"note_id\": 1,\n                    \"title\": \"Tech 1\",\n                    \"additional_link\": \"http://compower.local/uploads/products/default.png\"\n                },\n                {\n                    \"note_id\": 2,\n                    \"title\": \"Tech Note 2\",\n                    \"additional_link\": \"http://compower.local/uploads/products/default.png\"\n                }\n            ]\n        },\n        {\n            \"category_id\": 2,\n            \"title\": \"Tech Note 2\",\n            \"notes\": []\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (No Notes Found ):",
+          "content": "{\n    \"error\": {\n        \"message\": \"Unable to find Notes!\"\n    },\n    \"status\": false,\n    \"message\": \"No Notes Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Tech_Notes",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/techcategories"
       }
     ]
   }

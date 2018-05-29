@@ -48,14 +48,15 @@ class APICartController extends BaseApiController
      */
     public function index(Request $request)
     {
+        $userInfo   = $this->getAuthenticatedUser();
         $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
         $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
         $order      = $request->get('order') ? $request->get('order') : 'ASC';
-        $items      = $paginate ? $this->repository->model->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($orderBy, $order);
+        $items      = $this->repository->model->with(['product', 'user'])->where('user_id', $userInfo->id)->get();
 
         if(isset($items) && count($items))
         {
-            $itemsOutput = $this->cartTransformer->transformCollection($items);
+            $itemsOutput = $this->cartTransformer->showCart($items);
 
             return $this->successResponse($itemsOutput);
         }
@@ -107,7 +108,7 @@ class APICartController extends BaseApiController
             {
                 $items          = $this->repository->model->with(['product', 'user'])->where('user_id', $userInfo->id)->get();
                 $itemsOutput    = $this->cartTransformer->showCart($items);
-                return $this->successResponse($itemsOutput);
+                return $this->successResponse($itemsOutput, 'Product added to Cart Successfully.');
             }
         }
 
