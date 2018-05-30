@@ -2,18 +2,18 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Transformers\ProductsTransformer;
+use App\Http\Transformers\OrdersTransformer;
 use App\Http\Controllers\Api\BaseApiController;
-use App\Repositories\Products\EloquentProductsRepository;
+use App\Repositories\Orders\EloquentOrdersRepository;
 
-class APIProductsController extends BaseApiController
+class APIOrdersController extends BaseApiController
 {
     /**
-     * Products Transformer
+     * Orders Transformer
      *
      * @var Object
      */
-    protected $productsTransformer;
+    protected $ordersTransformer;
 
     /**
      * Repository
@@ -27,7 +27,7 @@ class APIProductsController extends BaseApiController
      *
      * @var string
      */
-    protected $primaryKey = 'product_id';
+    protected $primaryKey = 'ordersId';
 
     /**
      * __construct
@@ -35,12 +35,12 @@ class APIProductsController extends BaseApiController
      */
     public function __construct()
     {
-        $this->repository                       = new EloquentProductsRepository();
-        $this->productsTransformer = new ProductsTransformer();
+        $this->repository                       = new EloquentOrdersRepository();
+        $this->ordersTransformer = new OrdersTransformer();
     }
 
     /**
-     * List of All Products
+     * List of All Orders
      *
      * @param Request $request
      * @return json
@@ -50,18 +50,18 @@ class APIProductsController extends BaseApiController
         $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
         $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
         $order      = $request->get('order') ? $request->get('order') : 'ASC';
-        $items      = $paginate ? $this->repository->model->with('category')->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($orderBy, $order);
-
+        $items      = $paginate ? $this->repository->model->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($orderBy, $order);
+        
         if(isset($items) && count($items))
         {
-            $itemsOutput = $this->productsTransformer->transformCollection($items);
+            $itemsOutput = $this->ordersTransformer->orderTransform($items);
 
             return $this->successResponse($itemsOutput);
         }
 
         return $this->setStatusCode(400)->failureResponse([
-            'message' => 'Unable to find Products!'
-            ], 'No Products Found !');
+            'message' => 'Unable to find Orders!'
+            ], 'No Orders Found !');
     }
 
     /**
@@ -76,44 +76,14 @@ class APIProductsController extends BaseApiController
 
         if($model)
         {
-            $responseData = $this->productsTransformer->transform($model);
+            $responseData = $this->ordersTransformer->transform($model);
 
-            return $this->successResponse($responseData, 'Products is Created Successfully');
+            return $this->successResponse($responseData, 'Orders is Created Successfully');
         }
 
         return $this->setStatusCode(400)->failureResponse([
             'reason' => 'Invalid Inputs'
             ], 'Something went wrong !');
-    }
-
-    /**
-     * Filter Products
-     * 
-     * @param Request $request
-     * @return json
-     */
-    public function filterProducts(Request $request)
-    {
-        if($request->get('title'))
-        {
-            $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
-            $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
-            $order      = $request->get('order') ? $request->get('order') : 'ASC';
-            $title      = $request->get('title') ? $request->get('title') : '';
-            $items      = $paginate ? $this->repository->model->with('category')->where('title', 'LIKE', $title)
-                ->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getFilteredProducts($title, $orderBy, $order);
-
-            if(isset($items) && count($items))
-            {
-                $itemsOutput = $this->productsTransformer->transformCollection($items);
-
-            return $this->successResponse($itemsOutput);
-            }
-        }
-
-        return $this->setStatusCode(400)->failureResponse([
-            'message' => 'Unable to find Product!'
-            ], 'No Products Found !');
     }
 
     /**
@@ -132,7 +102,7 @@ class APIProductsController extends BaseApiController
 
             if($itemData)
             {
-                $responseData = $this->productsTransformer->transform($itemData);
+                $responseData = $this->ordersTransformer->transform($itemData);
 
                 return $this->successResponse($responseData, 'View Item');
             }
@@ -160,9 +130,9 @@ class APIProductsController extends BaseApiController
             if($status)
             {
                 $itemData       = $this->repository->getById($itemId);
-                $responseData   = $this->productsTransformer->transform($itemData);
+                $responseData   = $this->ordersTransformer->transform($itemData);
 
-                return $this->successResponse($responseData, 'Products is Edited Successfully');
+                return $this->successResponse($responseData, 'Orders is Edited Successfully');
             }
         }
 
@@ -188,8 +158,8 @@ class APIProductsController extends BaseApiController
             if($status)
             {
                 return $this->successResponse([
-                    'success' => 'Products Deleted'
-                ], 'Products is Deleted Successfully');
+                    'success' => 'Orders Deleted'
+                ], 'Orders is Deleted Successfully');
             }
         }
 
