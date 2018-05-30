@@ -16,6 +16,7 @@ class CreateTableDataOrders extends Migration
         Schema::create('data_orders', function (Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('user_id')->nullable();
             $table->string('order_number')->nullable();
             $table->float('order_total')->nullable()->default(0);
             $table->longText('description')->nullable();

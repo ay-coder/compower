@@ -242,9 +242,13 @@ class EloquentOrdersRepository extends DbRepository
      * @param string $sort
      * @return mixed
      */
-    public function getAll($orderBy = 'id', $sort = 'asc')
+    public function getAll($userId = null, $orderBy = 'id', $sort = 'asc')
     {
-        return $this->model->with(['order_items', 'order_items.product'])->orderBy($orderBy, $sort)->get();
+        if($userId)
+        {
+            return $this->model->where('user_id', $userId)->with(['order_items', 'order_items.product'])->orderBy($orderBy, $sort)->get();
+        }
+        return false;
     }
 
     /**

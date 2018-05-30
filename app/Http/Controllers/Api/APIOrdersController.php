@@ -47,11 +47,12 @@ class APIOrdersController extends BaseApiController
      */
     public function index(Request $request)
     {
+        $userInfo   = $this->getAuthenticatedUser();
         $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
         $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
         $order      = $request->get('order') ? $request->get('order') : 'ASC';
-        $items      = $paginate ? $this->repository->model->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($orderBy, $order);
-        
+        $items      = $paginate ? $this->repository->model->where('user_id', $userInfo->id)->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($userInfo->id, $orderBy, $order);
+
         if(isset($items) && count($items))
         {
             $itemsOutput = $this->ordersTransformer->orderTransform($items);
