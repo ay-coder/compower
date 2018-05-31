@@ -512,6 +512,39 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "notifications",
+    "title": "Notifications ( Need Headers)",
+    "name": "notifications",
+    "group": "Notifications",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n    \"data\": [\n        {\n            \"notification_id\": 1,\n            \"user_id\": 3,\n            \"description\": \"This is testing Notification\",\n            \"icon\": \"http://compower.local/uploads/notifications/default.png\",\n            \"is_read\": 1\n        },\n        {\n            \"notification_id\": 2,\n            \"user_id\": 3,\n            \"description\": \"Second Notification\",\n            \"icon\": \"http://compower.local/uploads/notifications/default.png\",\n            \"is_read\": 0\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (No Notifications Found ):",
+          "content": "{\n    \"error\": {\n        \"message\": \"Unable to find Notifications!\"\n    },\n    \"status\": false,\n    \"message\": \"No Notifications Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Notifications",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/notifications"
+      }
+    ]
+  },
+  {
+    "type": "get",
     "url": "orders",
     "title": "User Orders ( Need Headers)",
     "name": "orders",
