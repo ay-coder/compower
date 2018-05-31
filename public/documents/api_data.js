@@ -520,7 +520,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n    \"data\": [\n        {\n            \"order_id\": 1,\n            \"order_number\": \"1110291\",\n            \"order_total\": 1500,\n            \"description\": \"this is test order\",\n            \"order_status\": \"Pending\",\n            \"is_past\": 0,\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 3,\n                    \"price\": 45,\n                    \"item_total\": 135,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 10 May 2018\"\n                },\n                {\n                    \"product_id\": 2,\n                    \"product_title\": \"Product 2\",\n                    \"product_model\": \"Modla - 2\",\n                    \"product_image\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                    \"qty\": 15,\n                    \"price\": 80,\n                    \"item_total\": 1200,\n                    \"shipping_date\": \"02 January 2018\",\n                    \"expected_date\": \"Before 06 May 2018\"\n                }\n            ]\n        },\n        {\n            \"order_id\": 2,\n            \"order_number\": \"1192389\",\n            \"order_total\": 36900,\n            \"description\": \"This is second order\",\n            \"order_status\": \"Completed\",\n            \"is_past\": 1,\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 10,\n                    \"price\": 100,\n                    \"item_total\": 1000,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                },\n                {\n                    \"product_id\": 3,\n                    \"product_title\": \"Absorbing Clamp - 12\",\n                    \"product_model\": \"AB - 2018\",\n                    \"product_image\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"qty\": 6,\n                    \"price\": 80,\n                    \"item_total\": 480,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "content": "    {\n    \"data\": [\n        {\n            \"order_id\": 1,\n            \"order_number\": \"1110291\",\n            \"order_total\": 1500,\n            \"description\": \"this is test order\",\n            \"order_status\": \"Pending\",\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 3,\n                    \"price\": 45,\n                    \"item_total\": 135,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 10 May 2018\"\n                },\n                {\n                    \"product_id\": 2,\n                    \"product_title\": \"Product 2\",\n                    \"product_model\": \"Modla - 2\",\n                    \"product_image\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                    \"qty\": 15,\n                    \"price\": 80,\n                    \"item_total\": 1200,\n                    \"shipping_date\": \"02 January 2018\",\n                    \"expected_date\": \"Before 06 May 2018\"\n                }\n            ]\n        },\n        {\n            \"order_id\": 2,\n            \"order_number\": \"1192389\",\n            \"order_total\": 36900,\n            \"description\": \"This is second order\",\n            \"order_status\": \"Completed\",\n            \"is_past\": 1,\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 10,\n                    \"price\": 100,\n                    \"item_total\": 1000,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                },\n                {\n                    \"product_id\": 3,\n                    \"product_title\": \"Absorbing Clamp - 12\",\n                    \"product_model\": \"AB - 2018\",\n                    \"product_image\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"qty\": 6,\n                    \"price\": 80,\n                    \"item_total\": 480,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
           "type": "json"
         }
       ]
@@ -540,6 +540,39 @@ define({ "api": [
     "sampleRequest": [
       {
         "url": "http://35.154.84.230/compower/public/api/orders"
+      }
+    ]
+  },
+  {
+    "type": "get",
+    "url": "orders/past",
+    "title": "Past Orders ( Need Headers)",
+    "name": "orders_past",
+    "group": "Orders",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n    \"data\": [\n        {\n            \"order_id\": 1,\n            \"order_number\": \"1110291\",\n            \"order_total\": 1500,\n            \"description\": \"this is test order\",\n            \"order_status\": \"Pending\",\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 3,\n                    \"price\": 45,\n                    \"item_total\": 135,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 10 May 2018\"\n                },\n                {\n                    \"product_id\": 2,\n                    \"product_title\": \"Product 2\",\n                    \"product_model\": \"Modla - 2\",\n                    \"product_image\": \"http://compower.local/uploads/products/51936_product.jpg\",\n                    \"qty\": 15,\n                    \"price\": 80,\n                    \"item_total\": 1200,\n                    \"shipping_date\": \"02 January 2018\",\n                    \"expected_date\": \"Before 06 May 2018\"\n                }\n            ]\n        },\n        {\n            \"order_id\": 2,\n            \"order_number\": \"1192389\",\n            \"order_total\": 36900,\n            \"description\": \"This is second order\",\n            \"order_status\": \"Completed\",\n            \"is_past\": 1,\n            \"items\": [\n                {\n                    \"product_id\": 1,\n                    \"product_title\": \"Test Proudct\",\n                    \"product_model\": \"Modal - 001\",\n                    \"product_image\": \"http://compower.local/uploads/products/31797_product.jpg\",\n                    \"qty\": 10,\n                    \"price\": 100,\n                    \"item_total\": 1000,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                },\n                {\n                    \"product_id\": 3,\n                    \"product_title\": \"Absorbing Clamp - 12\",\n                    \"product_model\": \"AB - 2018\",\n                    \"product_image\": \"http://compower.local/uploads/products/45949_product.jpg\",\n                    \"qty\": 6,\n                    \"price\": 80,\n                    \"item_total\": 480,\n                    \"shipping_date\": \"05 May 2018\",\n                    \"expected_date\": \"Before 05 May 2018\"\n                }\n            ]\n        }\n    ],\n    \"status\": true,\n    \"message\": \"Success\",\n    \"code\": 200\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response (No Orders Found ):",
+          "content": "{\n    \"error\": {\n        \"message\": \"Unable to find Orders!\"\n    },\n    \"status\": false,\n    \"message\": \"No Orders Found !\",\n    \"code\": 400\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "compower-input/example.js",
+    "groupTitle": "Orders",
+    "sampleRequest": [
+      {
+        "url": "http://35.154.84.230/compower/public/api/orders/past"
       }
     ]
   },

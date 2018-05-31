@@ -26,13 +26,6 @@ class OrdersTransformer extends Transformer
 
     public function orderTransform($items)
     {
-        $completedOrderStatus = [
-            'Completed',
-            'Cancelled',
-            'Rejected',
-            'Delievered'
-        ];
-
         $response = [];
 
         if(isset($items) && count($items))
@@ -46,7 +39,6 @@ class OrdersTransformer extends Transformer
                     'order_total'   => (float) $order->order_total,
                     'description'   => $this->nulltoBlank($order->description),
                     'order_status'  => $this->nulltoBlank($order->order_status),
-                    'is_past'       => in_array($order->order_status, $completedOrderStatus) ? 1 : 0,
                     'items'         => []
                ];
 

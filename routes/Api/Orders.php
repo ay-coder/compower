@@ -2,6 +2,7 @@
 Route::group(['namespace' => 'Api'], function()
 {
     Route::get('orders', 'APIOrdersController@index')->name('orders.index');
+    Route::get('orders/past', 'APIOrdersController@pastOrders')->name('orders.index');
     Route::post('orders/create', 'APIOrdersController@create')->name('orders.create');
     Route::post('orders/edit', 'APIOrdersController@edit')->name('orders.edit');
     Route::post('orders/show', 'APIOrdersController@show')->name('orders.show');

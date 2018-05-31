@@ -47,11 +47,43 @@ class APIOrdersController extends BaseApiController
      */
     public function index(Request $request)
     {
+        $orderStatus= [
+            'Pending',
+            'Shipping',
+            'Processing',
+        ];
         $userInfo   = $this->getAuthenticatedUser();
         $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
         $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
         $order      = $request->get('order') ? $request->get('order') : 'ASC';
-        $items      = $paginate ? $this->repository->model->where('user_id', $userInfo->id)->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($userInfo->id, $orderBy, $order);
+        $items      = $paginate ? $this->repository->model->whereIn('order_status', $orderStatus)->where('user_id', $userInfo->id)->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($userInfo->id, $orderStatus, $orderBy, $order);
+
+        if(isset($items) && count($items))
+        {
+            $itemsOutput = $this->ordersTransformer->orderTransform($items);
+
+            return $this->successResponse($itemsOutput);
+        }
+
+        return $this->setStatusCode(400)->failureResponse([
+            'message' => 'Unable to find Orders!'
+            ], 'No Orders Found !');
+    }
+
+    public function pastOrders(Request $request)
+    {
+        $orderStatus= [
+            'Completed',
+            'Cancelled',
+            'Rejected',
+            'Delievered'
+        ];
+        $userInfo   = $this->getAuthenticatedUser();
+        $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
+        $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
+        $order      = $request->get('order') ? $request->get('order') : 'ASC';
+        $items      = $paginate ? $this->repository->model->where('user_id', $userInfo->id)
+        ->whereIn('order_status', $orderStatus)->with(['order_items', 'order_items.product'])->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($userInfo->id, $orderStatus,$orderBy, $order);
 
         if(isset($items) && count($items))
         {
