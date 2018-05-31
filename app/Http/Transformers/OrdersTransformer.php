@@ -56,6 +56,7 @@ class OrdersTransformer extends Transformer
                             'qty'           => (int) $item->qty,
                             'price'         => (float) $item->price,
                             'item_total'    => $item->qty * $item->price,
+                            'item_status'   => 'Pending',
                             'shipping_date' => isset($item->shipping_date) ? date('d F Y', strtotime($item->shipping_date)) : '',
                             'expected_date' => isset($item->expected_shipping_date) ? 'Before '. date('d F Y', strtotime($item->expected_shipping_date)) : ''
                         ];
