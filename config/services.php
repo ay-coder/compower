@@ -105,4 +105,8 @@ return [
         'scopes'        => [],
         'with'          => [],
     ],
+
+    'stripe' => [
+        'secret' => 'sk_test_HULXDAd7QAL1mZjpQhKpdIg7',
+    ],
 ];

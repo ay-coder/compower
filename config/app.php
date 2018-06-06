@@ -204,6 +204,9 @@ return [
 
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         App\Providers\HasherServiceProvider::class,
+
+        //Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        
     ],
 
     /*
@@ -269,7 +272,10 @@ return [
 
         // JWT Auth
         'JWTAuth'   => Tymon\JWTAuthFacades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class
+        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
+
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+
     ],
 
 ];

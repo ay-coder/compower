@@ -378,4 +378,36 @@ class EloquentCartRepository extends DbRepository
         
         return false;
     }
+
+    /**
+     * Get User Cart description]
+     * @param  [type] $userId [description]
+     * @return [type]         [description]
+     */
+    public function getUserCart($userId = null)
+    {
+        if($userId)
+        {
+            return $this->model->with('product')->where('user_id', $userId)->get();           
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Clear User Cart
+     * 
+     * @param int $userId
+     * @return bool
+     */
+    public function clearUserCart($userId = null)
+    {
+        if($userId)
+        {
+            return $this->model->where('user_id', $userId)->delete();           
+        }
+
+        return false;
+    }
 }

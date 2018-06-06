@@ -24,7 +24,7 @@ class Orders extends BaseModel
      *
      */
     protected $fillable = [
-        "id", "user_id", "order_number", "order_total", "description", "order_status", "status", "created_at", "updated_at", 
+        "id", "user_id", "order_number", "order_total", "description", "order_status", "status", "created_at", "updated_at", 'stripe_id', 'balance_transaction', 'statement_descriptor'
     ];
 
     /**

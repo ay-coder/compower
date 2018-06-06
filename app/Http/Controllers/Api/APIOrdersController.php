@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Http\Transformers\OrdersTransformer;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Repositories\Orders\EloquentOrdersRepository;
+use App\Repositories\Cart\EloquentCartRepository;
+use App\Models\Orders\Orders;
+use Cartalyst\Stripe\Stripe;
 
 class APIOrdersController extends BaseApiController
 {
@@ -105,13 +108,79 @@ class APIOrdersController extends BaseApiController
      */
     public function create(Request $request)
     {
-        $model = $this->repository->create($request->all());
-
-        if($model)
+        if($request->get('payment_token'))
         {
-            $responseData = $this->ordersTransformer->transform($model);
+            $cartObj    = new EloquentCartRepository;
+            $userInfo   = $this->getAuthenticatedUser();
+            $userCart   = $cartObj->getUserCart($userInfo->id);
+            $order      = new Orders;
 
-            return $this->successResponse($responseData, 'Orders is Created Successfully');
+            if(isset($userCart) && count($userCart))
+            {
+                $orderItems = [];
+                $orderTotal = 0;
+
+                foreach($userCart as $item)
+                {
+                    $orderTotal = $orderTotal + ($item->qty * $item->product->price);
+
+                    $orderItems[] = [
+                        'product_id'                => $item->product->id,
+                        'qty'                       => $item->qty,
+                        'price'                     => $item->product->price,
+                        'shipping_date'             => date('Y-m-d'),
+                        'expected_shipping_date'    => date('Y-m-d')
+                    ];
+                }
+
+                $orderInfo = [
+                    'user_id'           => $userInfo->id,
+                    'order_number'      => rand(11111, 99999),
+                    'order_total'       => $orderTotal,
+                    'description'       => 'This is test ',
+                    'order_status'      => 'Pending'
+                ];
+
+                $orderInfo = $order->create($orderInfo);
+
+                $orderItems = array_map(function($item) use($orderInfo) {
+                    $item['order_id'] = $orderInfo->id;
+                    return $item;
+                }, $orderItems);
+
+                $status = $orderInfo->order_items()->insert($orderItems);
+
+                if($status)
+                {
+                    $stripe = new Stripe('sk_test_HULXDAd7QAL1mZjpQhKpdIg7');
+
+                    $charge = $stripe->charges()->create([
+                        'amount'            => $orderTotal,
+                        'currency'          => 'usd',
+                        'description'       => 'Payment Clear by Client',
+                        'source'            => $request->get('payment_token'),
+                        'statement_descriptor' =>'Test Payment'
+                    ]);
+
+
+                    // Clear Cart Object
+                    $cartObj->clearUserCart($userInfo->id);
+
+                    $orderInfo->stripe_id           = $charge['id'];
+                    $orderInfo->balance_transaction = $charge['balance_transaction'];
+                    $orderInfo->statement_descriptor = $charge['statement_descriptor'];
+                    $orderInfo->save();
+
+                    $itemsOutput = $this->ordersTransformer->singleOrderTransform($orderInfo);
+                    
+
+                    return $this->successResponse($itemsOutput, 'Orders is Created Successfully');
+                }
+            }
+           
+            return $this->setStatusCode(400)->failureResponse([
+                'reason' => 'No Products found for Order Process !'
+                ], 'User Cart Empty');
         }
 
         return $this->setStatusCode(400)->failureResponse([

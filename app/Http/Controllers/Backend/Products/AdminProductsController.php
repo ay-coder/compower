@@ -6,6 +6,7 @@ use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\Products\EloquentProductsRepository;
 use App\Repositories\Category\EloquentCategoryRepository;
 use Html;
+use Cartalyst\Stripe\Stripe;
 
 /**
  * Class AdminProductsController
@@ -56,7 +57,39 @@ class AdminProductsController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
+    {   
+        $stripe = new Stripe('sk_test_HULXDAd7QAL1mZjpQhKpdIg7');
+
+        //dd($stripe);
+        //
+       /* $charge = $stripe->charges()->create([
+            'source'        => 'tok_visa',
+            'description'   => 'Test Plan  - 2',
+            'metadata'      => [
+                'userId' => 1,
+                'paydate' => date('Y-m-d'),
+                'customFlag'   =>1
+            ],
+            'receipt_email' => 'er.anujjaha@gmail.com',
+            'statement_descriptor' => 'BOOKED SERVICE',
+            'currency'      => 'USD',
+            'amount'        => 3,
+            'transfer_group' => "ORDER10",
+        ]);*/
+        
+        
+        $charge = $stripe->charges()->create([
+            'amount' => 19,
+            'currency' => 'usd',
+            'description' => 'Example charge',
+            'source' => 'tok_visa',
+            'statement_descriptor' => 'Custom descriptor',
+        ]);
+
+
+        dd($charge);
+
+
         return view($this->repository->setAdmin(true)->getModuleView('listView'))->with([
             'repository' => $this->repository
         ]);
