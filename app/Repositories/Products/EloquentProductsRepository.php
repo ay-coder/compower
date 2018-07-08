@@ -10,6 +10,8 @@ use App\Models\Products\Products;
 use App\Models\Category\Category;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
+use App\Models\Access\User\User;
+use App\Library\Push\PushNotification;
 
 class EloquentProductsRepository extends DbRepository
 {
@@ -184,10 +186,44 @@ class EloquentProductsRepository extends DbRepository
 
         if($model)
         {
+            $this->createNewProductNotification($model);
             return $model;
         }
 
         return false;
+    }
+
+    /**
+     * Create NewProduct Notification
+     * 
+     * @param object $model
+     */
+    public function createNewProductNotification($model)
+    {
+        $users = new User::where('status', 1)->get();
+
+        foreach($users as $user)
+        {
+            if(isset($user->device_token) && strlen($user->device_token) > 4 && $user->device_type == 1)
+            {
+                $payload = [
+                    'mtitle'    => 'Compower',
+                    'mdesc'     => $model->title . " Added by Admin."
+                ];
+
+                PushNotification::iOS($payload, $user->device_token);
+            }
+
+            if(isset($user->device_token) && strlen($user->device_token) > 4 && $user->device_type == 0)
+            {
+                $payload = [
+                    'mtitle'    => 'Compower',
+                    'mdesc'     => $model->title . " Added by Admin."
+                ];
+
+                PushNotification::android($payload, $user->device_token);
+            }
+        }
     }
 
     /**
