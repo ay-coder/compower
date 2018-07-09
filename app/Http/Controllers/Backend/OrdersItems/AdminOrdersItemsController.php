@@ -152,4 +152,34 @@ class AdminOrdersItemsController extends Controller
             })
             ->make(true);
     }
+
+    public function updateShippingDate(Request $request)
+    {
+        if($request->get('itemId') && $request->get('shippingDate'))
+        {
+            $model = $this->repository->model->where('id', $request->get('itemId'))->first();
+
+            if(isset($model->id))
+            {
+                $model->shipping_date = date('Y-m-d', strtotime($request->get('shippingDate')));
+                $model->shipping_status = $request->get('shippingStatus');
+                
+                $model->save();
+
+                $response = [
+                    'status'    => true,
+                    'message'   => 'Shipping Status and Date successfully updated !'
+                ];
+
+                return response()->json((object)$response,200);
+            }
+        }
+
+        $response = [
+            'status'    => false,
+            'message'   => 'Product not Found - Invalid Inputs!'
+        ];
+        
+        return response()->json((object)$response,200);
+    }
 }

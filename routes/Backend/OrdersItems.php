@@ -11,4 +11,6 @@ Route::group([
     Route::get("ordersitems/get", "AdminOrdersItemsController@getTableData")->name("ordersitems.get-list-data");
 
     Route::resource("ordersitems", "AdminOrdersItemsController");
+
+    Route::post("order-items/update-shipping-date", "AdminOrdersItemsController@updateShippingDate")->name("ordersitems.update-shipping-date");
 });

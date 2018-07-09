@@ -156,4 +156,35 @@ class AdminOrdersController extends Controller
             })
             ->make(true);
     }
+
+
+    public function updateStatus(Request $request)
+    {
+        if($request->get('itemId') && $request->get('orderStatus'))
+        {
+            $model = $this->repository->model->where('id', $request->get('itemId'))->first();
+
+            if(isset($model->id))
+            {
+                $model->order_status = $request->get('orderStatus');
+                
+                $model->save();
+
+                $response = [
+                    'status'    => true,
+                    'message'   => 'Order Status successfully updated !'
+                ];
+
+                return response()->json((object)$response,200);
+            }
+        }
+
+        $response = [
+            'status'    => false,
+            'message'   => 'Invalid Inputs!'
+        ];
+        
+        return response()->json((object)$response,200);    
+    }
+    
 }

@@ -24,7 +24,8 @@ class OrdersItems extends BaseModel
      *
      */
     protected $fillable = [
-        "id", "order_id", "product_id", "qty", "price", "shipping_date", "expected_shipping_date", "status", "created_at", "updated_at", 
+        "id", "order_id", "product_id", "qty", "price", "shipping_date", "expected_shipping_date",
+        "shipping_status", "status", "created_at", "updated_at", 
     ];
 
     /**
