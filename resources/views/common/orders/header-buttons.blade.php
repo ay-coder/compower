@@ -9,7 +9,7 @@
         </button>
 
         <ul class="dropdown-menu" role="menu">
-            <li>{{ link_to_route($createRoute, 'Create') }}</li>
+            {{--<li>{{ link_to_route($createRoute, 'Create') }}</li>--}}
         </ul>
     </div><!--btn group-->
 </div><!--pull right-->

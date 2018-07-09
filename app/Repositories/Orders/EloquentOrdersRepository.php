@@ -9,6 +9,8 @@
 use App\Models\Orders\Orders;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
+use App\Models\OrdersItems\OrdersItems;
+use App\Models\Access\User\User;
 
 class EloquentOrdersRepository extends DbRepository
 {
@@ -32,15 +34,14 @@ class EloquentOrdersRepository extends DbRepository
      * @var array
      */
     public $tableHeaders = [
-        'id'        => 'Id',
-'order_number'        => 'Order_number',
-'order_total'        => 'Order_total',
-'description'        => 'Description',
-'order_status'        => 'Order_status',
-'status'        => 'Status',
-'created_at'        => 'Created_at',
-'updated_at'        => 'Updated_at',
-"actions"         => "Actions"
+        'id'                => 'Id',
+        'order_number'      => 'Order Number',
+        'username'          => 'Customer Name',
+        'created_at'        => 'Order Items',
+        'order_total'       => 'Order Total',
+        'description'       => 'Description',
+        'order_status'      => 'Order Status',
+        "actions"           => "Actions"
     ];
 
     /**
@@ -61,6 +62,18 @@ class EloquentOrdersRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
+        'username' =>   [
+                'data'          => 'username',
+                'name'          => 'username',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+        'created_at' =>   [
+                'data'          => 'created_at',
+                'name'          => 'created_at',
+                'searchable'    => false,
+                'sortable'      => false
+            ],
 		'order_total' =>   [
                 'data'          => 'order_total',
                 'name'          => 'order_total',
@@ -76,24 +89,6 @@ class EloquentOrdersRepository extends DbRepository
 		'order_status' =>   [
                 'data'          => 'order_status',
                 'name'          => 'order_status',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'status' =>   [
-                'data'          => 'status',
-                'name'          => 'status',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'created_at' =>   [
-                'data'          => 'created_at',
-                'name'          => 'created_at',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'updated_at' =>   [
-                'data'          => 'updated_at',
-                'name'          => 'updated_at',
                 'searchable'    => true,
                 'sortable'      => true
             ],
@@ -173,7 +168,9 @@ class EloquentOrdersRepository extends DbRepository
      */
     public function __construct()
     {
-        $this->model = new Orders;
+        $this->model            = new Orders;
+        $this->userModel        = new User;
+        $this->orderItemModel   = new OrdersItems;
     }
 
     /**
@@ -275,7 +272,8 @@ class EloquentOrdersRepository extends DbRepository
     public function getTableFields()
     {
         return [
-            $this->model->getTable().'.*'
+            $this->model->getTable().'.*',
+            $this->userModel->getTable().'.name as username'
         ];
     }
 
@@ -284,7 +282,10 @@ class EloquentOrdersRepository extends DbRepository
      */
     public function getForDataTable()
     {
-        return $this->model->select($this->getTableFields())->get();
+        return $this->model->select($this->getTableFields())
+                ->leftjoin($this->userModel->getTable(), $this->userModel->getTable().'.id', '=', $this->model->getTable().'.user_id')
+                ->leftjoin($this->orderItemModel->getTable(), $this->orderItemModel->getTable().'.order_id', '=', $this->model->getTable().'.id')
+                ->get();
     }
 
     /**

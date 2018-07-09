@@ -90,7 +90,7 @@ class AdminOrdersController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $item = $this->repository->findOrThrowException($id);
+        $item = $this->repository->model->with(['user', 'order_items', 'order_items.product'])->where('id', $id)->first();
 
         return view($this->repository->setAdmin(true)->getModuleView('editView'))->with([
             'item'          => $item,
@@ -147,7 +147,11 @@ class AdminOrdersController extends Controller
     {
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['id', 'sort'])
-            ->addColumn('actions', function ($item) {
+            ->addColumn('created_at', function ($item) 
+            {
+                return isset($item->order_items) ? count($item->order_items) : 0;
+
+            })->addColumn('actions', function ($item) {
                 return $item->admin_action_buttons;
             })
             ->make(true);

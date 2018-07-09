@@ -200,7 +200,7 @@ class EloquentProductsRepository extends DbRepository
      */
     public function createNewProductNotification($model)
     {
-        $users = new User::where('status', 1)->get();
+        $users = User::where('status', 1)->get();
 
         foreach($users as $user)
         {
