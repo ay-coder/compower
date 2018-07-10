@@ -128,7 +128,7 @@ class PushNotification
 		$payload = json_encode($body);
 
 		// Build the binary notification
-		$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
+		@$msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($payload)) . $payload;
 
 		// Send it to the server
 		$result = @fwrite($fp, $msg, strlen($msg));

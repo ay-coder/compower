@@ -1,6 +1,6 @@
 <?php namespace App\Models\OrdersItems\Traits\Relationship;
 
-use App\Repositories\Orders\Orders;
+use App\Models\Orders\Orders;
 use App\Models\Products\Products;
 
 trait Relationship

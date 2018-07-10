@@ -23,6 +23,8 @@ class NotificationsTransformer extends Transformer
             "notification_id"       => (int) $item->id,
             "user_id"               => (int) $item->user_id, 
             "description"           =>  $item->description, 
+            "notification_type"     => $item->notification_type,
+            "product_id"            => isset($item->product_id) ? $item->product_id : '',
             "icon"                  =>  isset($item->icon) ? URL::to('/').'/uploads/notifications/'.$item->icon : '', 
             "is_read"               =>  $item->is_read
         ];

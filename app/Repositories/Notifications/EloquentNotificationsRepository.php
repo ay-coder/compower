@@ -9,6 +9,7 @@
 use App\Models\Notifications\Notifications;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
+use App\Library\Push\PushNotification;
 
 class EloquentNotificationsRepository extends DbRepository
 {
@@ -360,5 +361,29 @@ class EloquentNotificationsRepository extends DbRepository
         unset($clientColumns['username']);
 
         return json_encode($this->setTableStructure($clientColumns));
+    }
+
+    public function itemShippingPushNotification($item = null)
+    {
+        if(isset($item))
+        {
+            $notificationText   =  $item->product->title . ' Shipping Status updated.';
+            $payload            = [
+                    'mtitle'    => '',
+                    'mdesc'     => $notificationText
+                ];
+
+            if(isset($item->order->user->device_token) && $item->order->user->device_type == 1)
+            {
+                PushNotification::iOS($payload, $item->order->user->device_token);
+            }
+
+            if(isset($item->order->user->device_token) && $item->order->user->device_type == 0)
+            {
+                PushNotification::android($payload, $user->device_token);
+            }
+        }
+
+        return true;
     }
 }
