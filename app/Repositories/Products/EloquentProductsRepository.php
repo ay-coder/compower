@@ -207,7 +207,7 @@ class EloquentProductsRepository extends DbRepository
             if(isset($user->device_token) && strlen($user->device_token) > 4 && $user->device_type == 1)
             {
                 $payload = [
-                    'mtitle'    => 'Compower',
+                    'mtitle'    => '',
                     'mdesc'     => $model->title . " Added by Admin."
                 ];
 
@@ -217,7 +217,7 @@ class EloquentProductsRepository extends DbRepository
             if(isset($user->device_token) && strlen($user->device_token) > 4 && $user->device_type == 0)
             {
                 $payload = [
-                    'mtitle'    => 'Compower',
+                    'mtitle'    => '',
                     'mdesc'     => $model->title . " Added by Admin."
                 ];
 

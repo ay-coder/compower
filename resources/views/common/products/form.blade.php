@@ -139,7 +139,7 @@
             <div class="form-group">
                 {{ Form::label('pdf_title_1', 'Pdf Title 1 :', ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    {{ Form::text('pdf_title_1', null, ['class' => 'form-control', 'placeholder' => 'Pdf Title 1', 'required' => 'required']) }}
+                    {{ Form::text('pdf_title_1', null, ['class' => 'form-control', 'placeholder' => 'Pdf Title 1']) }}
                 </div>
             </div>
         </div>
