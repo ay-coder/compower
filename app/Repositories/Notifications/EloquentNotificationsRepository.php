@@ -372,6 +372,14 @@ class EloquentNotificationsRepository extends DbRepository
                     'mtitle'    => '',
                     'mdesc'     => $notificationText
                 ];
+            $notificationData   = [
+                'user_id'           => $item->order->user->id,
+                'product_id'        => $item->product_id,
+                'description'       => $notificationText,
+                'is_read'           => 0,
+                'icon'              => 'Shipping_Status_Updated.png',
+                'notification_type' => 'Shipping_Status_Updated'
+            ];
 
             if(isset($item->order->user->device_token) && $item->order->user->device_type == 1)
             {
@@ -382,6 +390,8 @@ class EloquentNotificationsRepository extends DbRepository
             {
                 PushNotification::android($payload, $user->device_token);
             }
+
+            return $this->model->create($notificationData);
         }
 
         return true;

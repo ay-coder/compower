@@ -214,6 +214,7 @@ class EloquentProductsRepository extends DbRepository
                 'product_id'        => $model->id,
                 'icon'              => 'Product_Added.png',
                 'description'       => $notificationText,
+                'is_read'           => 0,
                 'notification_type' => "Product_Added"
             ];
             
