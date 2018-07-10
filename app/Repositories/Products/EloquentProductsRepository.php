@@ -12,6 +12,8 @@ use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
 use App\Models\Access\User\User;
 use App\Library\Push\PushNotification;
+use App\Models\Notifications\Notifications;
+
 
 class EloquentProductsRepository extends DbRepository
 {
@@ -200,15 +202,27 @@ class EloquentProductsRepository extends DbRepository
      */
     public function createNewProductNotification($model)
     {
-        $users = User::where('status', 1)->get();
+        $users              = User::where('status', 1)->get();
+        $notificationText   = $model->title . " Added by Admin.";
+        $notificationModel  = new Notifications;
+        $userNotifications  = [];
 
         foreach($users as $user)
         {
+            $userNotifications[] = [
+                'user_id'           => $user->id,
+                'product_id'        => $model->id,
+                'icon'              => 'Product_Added.png',
+                'description'       => $notificationText,
+                'is_read'           => 0,
+                'notification_type' => "Product_Added"
+            ];
+            
             if(isset($user->device_token) && strlen($user->device_token) > 4 && $user->device_type == 1)
             {
                 $payload = [
                     'mtitle'    => '',
-                    'mdesc'     => $model->title . " Added by Admin."
+                    'mdesc'     => $notificationText
                 ];
 
                 PushNotification::iOS($payload, $user->device_token);
@@ -218,11 +232,16 @@ class EloquentProductsRepository extends DbRepository
             {
                 $payload = [
                     'mtitle'    => '',
-                    'mdesc'     => $model->title . " Added by Admin."
+                    'mdesc'     => $notificationText
                 ];
 
                 PushNotification::android($payload, $user->device_token);
             }
+        }
+
+        if(isset($userNotifications) && count($userNotifications))
+        {
+            $notificationModel->insert($userNotifications);
         }
     }
 

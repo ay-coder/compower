@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\OrdersItems\EloquentOrdersItemsRepository;
+use App\Repositories\Notifications\EloquentNotificationsRepository;
 
 /**
  * Class AdminOrdersItemsController
@@ -155,23 +156,29 @@ class AdminOrdersItemsController extends Controller
 
     public function updateShippingDate(Request $request)
     {
+        $notificationRepo = new EloquentNotificationsRepository;
+
         if($request->get('itemId') && $request->get('shippingDate'))
         {
-            $model = $this->repository->model->where('id', $request->get('itemId'))->first();
+            $model = $this->repository->model->with(['order', 'product', 'order.user'])->where('id', $request->get('itemId'))->first();
 
             if(isset($model->id))
             {
                 $model->shipping_date = date('Y-m-d', strtotime($request->get('shippingDate')));
                 $model->shipping_status = $request->get('shippingStatus');
                 
-                $model->save();
+                if($model->save())
+                {
+                    $notificationRepo->itemShippingPushNotification($model);
 
-                $response = [
-                    'status'    => true,
-                    'message'   => 'Shipping Status and Date successfully updated !'
-                ];
+                    $response = [
+                        'status'    => true,
+                        'message'   => 'Shipping Status and Date successfully updated !'
+                    ];
 
-                return response()->json((object)$response,200);
+                    return response()->json((object)$response,200);
+                }
+
             }
         }
 
