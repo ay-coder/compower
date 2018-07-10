@@ -113,7 +113,8 @@ class UsersController extends BaseApiController
         $successResponse = [
             'support_number'        => '110001010',
             'privacy_policy_url'    => 'https://www.google.co.in/',
-            'app_link'              => 'https://www.google.co.in/'
+            'app_link'              => 'https://www.google.co.in/',
+            'delivery_number'       => '1234567890'
         ];
 
         return $this->successResponse($successResponse);
