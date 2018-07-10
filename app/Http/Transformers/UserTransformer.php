@@ -12,7 +12,7 @@ class UserTransformer extends Transformer
         return [
             'user_id'       => $data->id,
             'user_token'    => $this->nulltoBlank($data->token),
-            'device_token'  => $data->device_token,
+            'device_token'  => $this->nulltoBlank($data->device_token),
             'name'          => $this->nulltoBlank($data->name),
             'email'         => $this->nulltoBlank($data->email),
             'company_name'  => $this->nulltoBlank($data->company_name),
@@ -91,7 +91,7 @@ class UserTransformer extends Transformer
         return [
             'user_id'           => (int) $data->id,
             'user_token'        => $userToken,
-            'device_token'      => $data->device_token,
+            'device_token'      => $this->nulltoBlank($data->device_token),
             'name'              => $this->nulltoBlank($data->name),
             'email'             => $this->nulltoBlank($data->email),
             'company_name'      => $this->nulltoBlank($data->company_name),
