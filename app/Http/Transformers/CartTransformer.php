@@ -30,8 +30,8 @@ class CartTransformer extends Transformer
             "qty"           => (int) $item->qty, 
             "title"         => $item->product->title,
             "model"         => $item->product->model,
-            "price"         => $item->product->price,
-            "total"         => $item->product->price * $item->qty,
+            "price"         => (float) $item->product->price,
+            "total"         => (float) $item->product->price * $item->qty,
             'images'        => [],
             'charts'        => [],
             'pdfs'          => []
@@ -137,8 +137,8 @@ class CartTransformer extends Transformer
                     "qty"           => (int) $item->qty, 
                     "title"         => $item->product->title,
                     "model"         => $item->product->model,
-                    "price"         => $item->product->price,
-                    "total"         => $item->product->price * $item->qty,
+                    "price"         => (float) $item->product->price,
+                    "total"         => (float) $item->product->price * $item->qty,
                     'images'        => [],
                     'charts'        => [],
                     'pdfs'          => []
