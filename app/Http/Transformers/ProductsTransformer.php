@@ -19,6 +19,11 @@ class ProductsTransformer extends Transformer
             $item = (object)$item;
         }
 
+        $productPdf     = [];
+        $productChart   = [];
+        $productPdf     = [];
+        $productImages  = [];
+        
         $product = $item;
 
         $response = [
