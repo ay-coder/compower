@@ -360,7 +360,33 @@ class EloquentCartRepository extends DbRepository
         }
         
         return false;
+    }   
+
+    /**
+     * Add To Bag
+     * 
+     * @param int $userId
+     * @param int $productId
+     * @param array $input
+     */
+    public function addToBag($userId = null, $productId = null, $input = array())
+    {
+        if($userId && $productId)
+        {
+            $cartObj = $this->model->where(['user_id' => $userId, 'product_id' => $productId])->first();
+
+            if($cartObj)
+            {
+                $cartObj->qty = $cartObj->qty + 1;
+                return $cartObj->save();
+            }
+            return $this->model->create($input);
+        }
+        
+        return false;
     }
+
+    
 
     /**
      * Remove FromCart
