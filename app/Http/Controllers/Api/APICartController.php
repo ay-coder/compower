@@ -88,6 +88,37 @@ class APICartController extends BaseApiController
             ], 'Something went wrong !');
     }
 
+    
+
+    /**
+     * Add To Cart
+     *
+     * @param Request $request
+     * @return string
+     */
+    public function addToBag(Request $request)
+    {
+        if($request->get('product_id'))
+        {
+            $productId  = $request->get('product_id');   
+            $input      = $request->all();
+            $userInfo   = $this->getAuthenticatedUser();
+            $input      = array_merge($input, ['user_id' => $userInfo->id]);
+            $status     = $this->repository->addToBag($userInfo->id, $productId, $input);
+
+            if($status)
+            {
+                $items          = $this->repository->model->with(['product', 'user'])->where('user_id', $userInfo->id)->get();
+                $itemsOutput    = $this->cartTransformer->showCart($items);
+                return $this->successResponse($itemsOutput, 'Product added to Bag Successfully.');
+            }
+        }
+
+        return $this->setStatusCode(400)->failureResponse([
+            'reason' => 'Invalid Inputs'
+            ], 'Something went wrong !');
+    }
+
     /**
      * Add To Cart
      *
