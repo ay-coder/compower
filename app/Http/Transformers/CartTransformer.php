@@ -126,6 +126,7 @@ class CartTransformer extends Transformer
                 $item->product  = (object) $item->product;
                 $product        = $item->product;
                 $cartTotal      = $cartTotal + ($item->product->price * $item->qty );
+                $productImages  = [];
 
                 $totalItems++;
 
