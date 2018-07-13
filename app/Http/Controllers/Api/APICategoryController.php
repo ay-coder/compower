@@ -48,13 +48,15 @@ class APICategoryController extends BaseApiController
     public function index(Request $request)
     {
         $paginate   = $request->get('paginate') ? $request->get('paginate') : false;
+        $productCount= $request->get('product_count') ? $request->get('product_count') : 10000;
+
         $orderBy    = $request->get('orderBy') ? $request->get('orderBy') : 'id';
         $order      = $request->get('order') ? $request->get('order') : 'ASC';
         $items      = $paginate ? $this->repository->model->with('products')->orderBy($orderBy, $order)->paginate($paginate)->items() : $this->repository->getAll($orderBy, $order);
 
         if(isset($items) && count($items))
         {
-            $itemsOutput = $this->categoryTransformer->transformCollection($items);
+            $itemsOutput = $this->categoryTransformer->getCategories($items, $productCount);
 
             return $this->successResponse($itemsOutput);
         }
