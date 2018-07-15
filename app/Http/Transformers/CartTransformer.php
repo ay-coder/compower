@@ -19,6 +19,8 @@ class CartTransformer extends Transformer
             $item = (object)$item;
         }
 
+        $productPdf = $productChart = $productImages = [];
+
         $item->user     = (object) $item->user;
         $item->product  = (object) $item->product;
         $product        = $item->product;
@@ -114,6 +116,8 @@ class CartTransformer extends Transformer
             'total_items'   => 0,
             'cart_total'    => 0
         ];
+
+        $productPdf = $productChart = $productImages = [];
 
         if($items)
         {
