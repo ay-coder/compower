@@ -152,7 +152,7 @@ class APIOrdersController extends BaseApiController
 
                 if($status)
                 {
-                    $stripe = new Stripe('sk_test_HULXDAd7QAL1mZjpQhKpdIg7');
+                    $stripe = new Stripe('sk_test_autrVFuGHApy11JWvn3hWpPY');
 
                     $charge = $stripe->charges()->create([
                         'amount'            => $orderTotal,
