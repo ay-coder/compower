@@ -52,6 +52,13 @@
                     <span>Manage Orders</span>
                 </a>
             </li>
+            .
+            <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
+                <a href="{{ route('admin.category.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Manage Categories</span>
+                </a>
+            </li>
 
             @role(1)
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
