@@ -19,6 +19,66 @@ class PushNotification
 	{
 		exit('Init function is not allowed');
 	}
+
+	/**
+     * Android
+     * 
+     * @param array $data
+     * @param string $reg_id
+     * @return bool|mixed
+     */
+	public static function android($data, $devicetoken) 
+	{
+		    $message = [
+	        	'title' 		=> $data['mtitle'],
+	        	'message' 		=> $data['mdesc'],
+	        	'subtitle' 		=> '',
+	        	'tickerText' 	=> '',
+	        	'msgcnt' 		=> 1,
+	        	'vibrate' 		=> 1
+			];
+	        
+	        /*$headers = [
+	        	'Authorization: key=' .self::$API_ACCESS_KEY,
+	        	'Content-Type: application/json'
+	        ];
+
+	        $fields = [
+	            'registration_ids' 	=> array($reg_id),
+	            'data' 				=> $message,
+	            'badge'				=> access()->getUnreadNotificationCount(),
+	        ];
+	
+	    	return $this->useCurl($url, $headers, json_encode($fields));*/
+
+
+			$fields = array
+			(
+				'registration_ids' 	=> array($devicetoken),
+			    'data'      		=> $message
+			);
+
+			$key = 'AAAA13XjhSs:APA91bEZoBo5G5lsIpg_eZNKuGkahRbv2S18z2q7PBHHT_nIklJojMOb36SpA80UWkWVYa0o4ae-RZIpcDx_4Ae5moVqDj6Oq_o9Bc-e-aWsrJjGUekEOsma2ZTLMKjRtve3SlSbgJm2';
+			 
+			$headers = array
+			(
+			    'Authorization: key='.$key,
+			    'Content-Type: application/json'
+			);
+			 
+			$ch = curl_init();
+			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+			curl_setopt( $ch,CURLOPT_POST, true );
+			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+			$result = curl_exec($ch );
+			curl_close( $ch );
+		
+			return $result;
+
+    	}
 	
     /**
      * Android
@@ -27,7 +87,7 @@ class PushNotification
      * @param string $reg_id
      * @return bool|mixed
      */
-	public function android($data, $reg_id) 
+	public function android1($data, $reg_id) 
 	{
 	        $url = 'https://android.googleapis.com/gcm/send';
 
