@@ -385,8 +385,7 @@ class EloquentNotificationsRepository extends DbRepository
             {
                 PushNotification::iOS($payload, $item->order->user->device_token);
             }
-
-            if(isset($item->order->user->device_token) && $item->order->user->device_type == 0)
+            else if(isset($item->order->user->device_token))
             {
                 PushNotification::android($payload, $user->device_token);
             }
