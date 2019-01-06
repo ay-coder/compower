@@ -3,6 +3,9 @@
 namespace App\Services\Access;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\Testimonials\Testimonials;
+use App\Models\Pages\Pages;
+use App\Models\Category\Category;
 
 /**
  * Class Access.
@@ -149,5 +152,41 @@ class Access
     public function hasPermissions($permissions, $needsAll = false)
     {
         return $this->allowMultiple($permissions, $needsAll);
+    }
+
+    /**
+     * Get Testimonials
+     * 
+     * @return object
+     */
+    public function getTestimonials()
+    {
+        return Testimonials::orderBy("id", "desc")->get();
+    }
+
+    /**
+     * Get Page
+     * 
+     * @param string $dataKey
+     * @return mixed
+     */
+    public function getPage($dataKey = null)
+    {
+        if($dataKey)   
+        {
+            return Pages::where('data_key', $dataKey)->first();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get All Categories
+     * 
+     * @return object
+     */
+    public function getAllCategories()
+    {
+        return Category::all();
     }
 }

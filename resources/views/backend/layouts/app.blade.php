@@ -24,6 +24,8 @@
             {{ Html::style(mix('css/backend.css')) }}
         @endif
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+
         @yield('after-styles')
 
         <!-- Html5 Shim and Respond.js IE8 support of Html5 elements and media queries -->
@@ -71,6 +73,20 @@
         @yield('before-scripts')
         {{ Html::script(mix('js/backend.js')) }}
         <script type="text/javascript" src="{!! asset('js/custom/custom.js') !!}"></script>
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+        <script>
+                tinymce.init({
+                    selector: '.tiny-mce',
+                     plugins: [
+                        "advlist autolink lists link image charmap print preview anchor",
+                        "searchreplace visualblocks code fullscreen",
+                        "insertdatetime media table contextmenu paste"
+                    ],
+                    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                });
+        </script>
         @yield('after-scripts')
     </body>
 </html>

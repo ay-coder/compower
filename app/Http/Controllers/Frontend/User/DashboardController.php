@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+    	return redirect()->route('frontend.my-orders');
         return view('frontend.user.dashboard');
     }
 }

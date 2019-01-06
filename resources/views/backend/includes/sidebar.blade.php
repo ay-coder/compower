@@ -52,11 +52,34 @@
                     <span>Manage Orders</span>
                 </a>
             </li>
-            .
+            
             <li class="{{ active_class(Active::checkUriPattern('admin/category')) }}">
                 <a href="{{ route('admin.category.index') }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Manage Categories</span>
+                </a>
+            </li>
+
+            <li class="header">Web</li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/banners')) }}">
+                <a href="{{ route('admin.banners.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Manage Banners</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/testimonials')) }}">
+                <a href="{{ route('admin.testimonials.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Manage Testimonials</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/distributorcountries')) }}">
+                <a href="{{ route('admin.distributorcountries.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Manage Distributor Countries</span>
                 </a>
             </li>
 

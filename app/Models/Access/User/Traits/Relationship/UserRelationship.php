@@ -5,6 +5,8 @@ namespace App\Models\Access\User\Traits\Relationship;
 use App\Models\Event\Event;
 use App\Models\System\Session;
 use App\Models\Access\User\SocialLogin;
+use App\Models\Orders\Orders;
+use App\Models\Cart\Cart;
 
 /**
  * Class UserRelationship.
@@ -44,4 +46,24 @@ trait UserRelationship
     {
         return $this->hasMany(Event::class);
     }    
+
+    /**
+     * User Orders
+     * 
+     * @return mixed
+     */
+    public function user_orders()
+    {
+        return $this->hasMany(Orders::class, 'user_id');
+    }
+
+    /**
+     * User Cart
+     * 
+     * @return mixed
+     */
+    public function user_cart()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
 }

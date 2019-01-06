@@ -1,0 +1,8 @@
+drwx------   2 ftp      ftp          4096 Mar 28 14:28 .
+drwx------  34 ftp      ftp          4096 May 25 19:31 ..
+-rw-r--r--   1 ftp      ftp         10033 Mar 28 14:28 alfm80120_AFE.png
+-rw-r--r--   1 ftp      ftp         19187 Mar 28 14:28 alfm80120_field-strenght.png
+-rw-r--r--   1 ftp      ftp         24483 Mar 28 14:28 alfm80120_fwd-power.png
+-rw-r--r--   1 ftp      ftp         11370 Mar 28 14:28 alfm80120_gain.png
+-rw-r--r--   1 ftp      ftp         11158 Mar 28 14:28 alfm80120_return-loss.png
+-rw-r--r--   1 ftp      ftp         10276 Mar 28 14:28 alfm80120_vswr.png
