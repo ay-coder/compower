@@ -28,7 +28,7 @@ class GenerateCategorySlug extends Migration
 
         foreach($products as $product)
         {
-            $slug = access()->generateSlug($product->title);
+            $slug = access()->generateSlug($product->title, $product->model);
             $product->slug = $slug;
             $product->save();
         }

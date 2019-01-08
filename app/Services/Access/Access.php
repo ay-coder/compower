@@ -194,13 +194,24 @@ class Access
      * Generate Slug
      * 
      * @param string $title
+     * @param string $subTitle
      * @return string
      */
-    public function generateSlug($title = null)
+    public function generateSlug($title = null, $subTitle = '')
     {
         if($title)
         {
-            return strtolower(str_replace(" ", "-", $title));
+            $title = strtolower(str_replace(" ", "-", $title));
+
+            if(isset($subTitle) && strlen($subTitle) > 0)
+            {
+                $subTitle = strtolower(str_replace(" ", "-", $title));
+
+                return $title . '-' . $subTitle;
+            }
+            
+
+            return $title;
         }
 
         return '';
