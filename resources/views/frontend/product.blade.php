@@ -55,7 +55,7 @@
                       				Add to Cart
                       			</a>
                       		@else
-                      			<a  href="{!! route('frontend.login') !!}" class="btn btn-primary">
+                      			<a  href="{!! route('frontend.auth.login') !!}" class="btn btn-primary">
                       				Click Here To Login 
                       			</a>
                       		@endif
