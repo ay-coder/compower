@@ -27,7 +27,9 @@ Route::get('blog', 'FrontendController@blog')->name('blog');
 
 Route::get('my-orders', 'FrontendController@myOrders')->name('my-orders');
 Route::get('my-wishlist', 'FrontendController@myWishlist')->name('my-wishlist');
+
 Route::get('my-cart', 'FrontendController@myCart')->name('my-cart');
+Route::get('place-order', 'FrontendController@placeOrder')->name('place-order');
 
 Route::post('remove-cart-product', 'FrontendController@removeCartProduct')->name('remove-cart-product');
 

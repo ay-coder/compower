@@ -64,6 +64,14 @@
           </td>
       </tr>
       @endforeach
+
+      <tr>
+        <td colspan="4">
+          <a href="{!! route('frontend.place-order') !!}" class="btn btn-success pull-right">
+            Place Order
+          </a>
+        </td>
+      </tr> 
     @else
       <tr>
         <td colspan="3">No Product Added in Cart!</td>

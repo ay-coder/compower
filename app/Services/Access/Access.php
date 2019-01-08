@@ -189,4 +189,21 @@ class Access
     {
         return Category::all();
     }
+
+    /**
+     * Generate Slug
+     * 
+     * @param string $title
+     * @return string
+     */
+    public function generateSlug($title = null)
+    {
+        if($title)
+        {
+            return strtolower(str_replace(" ", "-", $title));
+        }
+
+        return '';
+    }
+
 }

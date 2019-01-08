@@ -12,6 +12,8 @@ use App\Models\DistributorCountries\DistributorCountries;
 use App\Models\TechCategories\TechCategories;
 use App\Models\Access\User\User;
 use App\Models\Cart\Cart;
+use App\Repositories\Cart\EloquentCartRepository;
+use App\Models\Orders\Orders;
 
 /**
  * Class FrontendController.
@@ -123,6 +125,64 @@ class FrontendController extends Controller
         return view('frontend.product')->with([
             'product' => $product
         ]);
+    }
+
+    /**
+     * Place Order
+     * 
+     * @param Request $request
+     * @return mixed
+     */
+    public function placeOrder(Request $request)
+    {
+        $userInfo   = access()->user();
+        $cartObj    = new EloquentCartRepository;
+        $userCart   = $cartObj->getUserCart($userInfo->id);
+        $order      = new Orders;
+
+        if(isset($userCart) && count($userCart))
+        {
+            $orderItems = [];
+            $orderTotal = 0;
+
+            foreach($userCart as $item)
+            {
+                $orderTotal = $orderTotal + ($item->qty * $item->product->price);
+
+                $orderItems[] = [
+                    'product_id'                => $item->product->id,
+                    'qty'                       => $item->qty,
+                    'price'                     => $item->product->price,
+                    'shipping_date'             => date('Y-m-d'),
+                    'expected_shipping_date'    => date('Y-m-d')
+                ];
+            }
+
+            $orderInfo = [
+                'user_id'           => $userInfo->id,
+                'order_number'      => rand(11111, 99999),
+                'order_total'       => $orderTotal,
+                'description'       => 'This is test ',
+                'order_status'      => 'Pending'
+            ];
+
+            $orderInfo = $order->create($orderInfo);
+
+            $orderItems = array_map(function($item) use($orderInfo) {
+                $item['order_id'] = $orderInfo->id;
+                return $item;
+            }, $orderItems);
+
+            $status = $orderInfo->order_items()->insert($orderItems);
+
+            if($status)
+            {
+                // Clear Cart Object
+                $cartObj->clearUserCart($userInfo->id);
+
+                return redirect()->route('frontend.index')->withFlashSuccess('Order Placed Successfully!');
+            }
+        }
     }
     
 
