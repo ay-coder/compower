@@ -50,9 +50,15 @@
   						<div class="panel-body">
                       		{!! $product->description !!}
                       		<div class="pull-right">
-                      		<a data-id="{!! $product->id !!}" href="javascript:void(0);" class="btn btn-primary add-item-to-cart">
-                      			Add to Cart
-                      		</a>
+                      		@if(isset(access()->user()->id))
+                      			<a data-id="{!! $product->id !!}" href="javascript:void(0);" class="btn btn-primary add-item-to-cart">
+                      				Add to Cart
+                      			</a>
+                      		@else
+                      			<a  href="{!! route('frontend.login') !!}" class="btn btn-primary">
+                      				Click Here To Login 
+                      			</a>
+                      		@endif
                       		</div>
                         </div>
 					</div>

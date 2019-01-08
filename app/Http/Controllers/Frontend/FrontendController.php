@@ -336,6 +336,11 @@ class FrontendController extends Controller
      */
     public function addProductToCart(Request $request)
     {
+        if(!access()->user())
+        {
+            return redirect()->route('frontend.index')->withFlashDanger('Please Login to Continue!');
+        }
+
         if($request->has('productId'))
         {
             $userId     = access()->user()->id;
