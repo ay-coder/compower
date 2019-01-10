@@ -83,6 +83,13 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/distributors')) }}">
+                <a href="{{ route('admin.distributors.index') }}">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Manage Distributors</span>
+                </a>
+            </li>
+
             @role(1)
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Yajra\Datatables\Facades\Datatables;
 use App\Repositories\DistributorCountries\EloquentDistributorCountriesRepository;
+use App\Models\DistributorCountries\DistributorCountries;
 
 /**
  * Class AdminDistributorCountriesController
