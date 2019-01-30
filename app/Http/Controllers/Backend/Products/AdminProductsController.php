@@ -164,9 +164,9 @@ class AdminProductsController extends Controller
         }
 
 
-        $this->repository->create($input);
+        $model = $this->repository->create($input);
 
-        return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashSuccess($this->createSuccessMessage);
+        return redirect()->route('admin.products.edit', ['id' => $model->id])->withFlashSuccess($this->editSuccessMessage);
     }
 
     /**
@@ -287,9 +287,9 @@ class AdminProductsController extends Controller
             $input = array_merge($input, ['image_5' => $imageName]);
         }
 
-        $status = $this->repository->update($id, $input);
-
-        return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashSuccess($this->editSuccessMessage);
+        $model = $this->repository->update($id, $input);
+        
+        return redirect()->route('admin.products.edit', ['id' => $id])->withFlashSuccess($this->editSuccessMessage);
     }
 
     /**
